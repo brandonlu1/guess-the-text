@@ -5,18 +5,31 @@ import MessageCard from "../components/MessageCard"
 import "./globals.css"
 
 export default function App() {
-  const [index, setIndex] = useState(0)
-  const [message, setMessage] = useState<any>(null) // fetched message
+  const [index, setIndex] = useState<number>(0)
+  const [message, setMessage] = useState<any>(null)
   const [flipped, setFlipped] = useState(false)
 
   // Fetch message whenever index changes
   useEffect(() => {
     setFlipped(false) // reset flip state on next card
+
     const fetchMessage = async () => {
-      const res = await fetch(`/api/messages/${index}`)
-      const data = await res.json()
-      setMessage(data)
+      try {
+        const res = await fetch(`/api/messages/${index}`)
+        if (!res.ok) {
+          console.error("API returned error:", res.status)
+          setMessage({ done: true, text: [] })
+          return
+        }
+
+        const data = await res.json()
+        setMessage(data)
+      } catch (err) {
+        console.error("Fetch failed", err)
+        setMessage({ done: true, text: [] })
+      }
     }
+
     fetchMessage()
   }, [index])
 
@@ -24,12 +37,21 @@ export default function App() {
 
   if (!message) return <div>Loading...</div>
 
+  // deck finished
+  if (message.done) {
+    return (
+      <main className="container">
+        <h1>All messages viewed!</h1>
+      </main>
+    )
+  }
+
   return (
     <main className="container">
       <h1>Guess the Text</h1>
 
       <MessageCard
-        key={message.number + index} // ensures fresh mount
+        key={index + "-" + JSON.stringify(message.text)} 
         message={message}
         flipped={flipped}
         onToggle={() => setFlipped((prev) => !prev)}

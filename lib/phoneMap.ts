@@ -5,28 +5,28 @@ export interface UserInfo {
 
 export const phoneMap: Record<string, UserInfo> = {
   "+3691215182": {
-    name: "Devin Jiang",
-    picture: "/images/devin.jpg",
+    name: "Fwosty",
+    picture: "1/images/fwosty.jpg",
   },
   "+1234554321": {
-    name: "Alex Lee",
-    picture: "/images/alex.jpg",
+    name: "beastgamer789",
+    picture: "1/images/beastgamer.jpg",
   },
     "+1234567890": {
-    name: "Tashi Tseten",
-    picture: "/images/tashi.jpg",
+    name: "Tashiko",
+    picture: "1/images/tashiko.jpg",
   },
     "+2468101214": {
-    name: "Ze Jun Lin",
-    picture: "/images/ze.jpg",
+    name: "Zzze",
+    picture: "1/images/zzze.jpg",
   },
     "+0909090909": {
-    name: "Robert Huang",
-    picture: "/images/robert.jpg",
+    name: "F2Kation",
+    picture: "1/images/f2k.jpg",
   },
     "+1212121212": {
-    name: "Brandon Lu",
-    picture: "/images/brandon.jpg",
+    name: "grippykitten69",
+    picture: "1/images/grip.jpg",
   },
 
 }

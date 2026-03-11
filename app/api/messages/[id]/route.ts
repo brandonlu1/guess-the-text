@@ -1,17 +1,20 @@
-import { NextResponse } from "next/server"
-import { shuffledDeck } from "@/lib/shuffledDeck"
+// app/api/messages/[id]/route.ts
+import { shuffledDeck } from "../route"
 
 export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> } // App Router dynamic route params
+  req: Request,
+  context: { params: { id: string } | Promise<{ id: string }> } // params can be a Promise
 ) {
-  const resolvedParams = await params
-  const id = resolvedParams.id
-  const index = Number(id)
+  // Unwrap params if it's a Promise
+  const params = await context.params
+  const index = Number(params.id)
 
   if (isNaN(index) || index < 0 || index >= shuffledDeck.length) {
-    return NextResponse.json({ done: true, text: [] })
+    return new Response(JSON.stringify({ error: "Invalid index" }), { status: 400 })
   }
 
-  return NextResponse.json(shuffledDeck[index])
+  return new Response(JSON.stringify(shuffledDeck[index]), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  })
 }

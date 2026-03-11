@@ -34,8 +34,7 @@ export default function MessageCard({ message, flipped, onToggle }: Props) {
           ) : (
             <p>{message.number}</p>
           )}
-          sent on
-          <p>{message.date}</p>
+          <p>Sent on {message.date}</p>
         </div>
       </div>
     </div>

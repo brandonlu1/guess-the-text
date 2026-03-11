@@ -1,5 +1,11 @@
-import type { Bubble as BubbleType } from "../types/message"
+"use client"
 
-export default function Bubble({ sender, text }: BubbleType) {
-  return <div className={`bubble ${sender}`}>{text}</div>
+interface Props {
+  sender: "me" | "other"
+  text: string
+}
+
+export default function Bubble({ sender, text }: Props) {
+  const className = sender === "me" ? "bubble me" : "bubble other"
+  return <div className={className}>{text}</div>
 }

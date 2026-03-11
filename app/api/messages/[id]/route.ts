@@ -3,9 +3,11 @@ import { shuffledDeck } from "@/lib/shuffledDeck"
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> } // App Router dynamic route params
 ) {
-  const index = Number(await params.id) // unwrap if needed
+  const resolvedParams = await params
+  const id = resolvedParams.id
+  const index = Number(id)
 
   if (isNaN(index) || index < 0 || index >= shuffledDeck.length) {
     return NextResponse.json({ done: true, text: [] })

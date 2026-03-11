@@ -9,55 +9,38 @@ export default function App() {
   const [message, setMessage] = useState<any>(null)
   const [flipped, setFlipped] = useState(false)
 
-  // Fetch message whenever index changes
   useEffect(() => {
-    setFlipped(false) // reset flip state on next card
-
+    setFlipped(false)
     const fetchMessage = async () => {
-      try {
-        const res = await fetch(`/api/messages/${index}`)
-        if (!res.ok) {
-          console.error("API returned error:", res.status)
-          setMessage({ done: true, text: [] })
-          return
-        }
-
-        const data = await res.json()
-        setMessage(data)
-      } catch (err) {
-        console.error("Fetch failed", err)
-        setMessage({ done: true, text: [] })
-      }
+      const res = await fetch(`/api/messages/${index}`)
+      const data = await res.json()
+      setMessage(data)
     }
-
     fetchMessage()
   }, [index])
 
-  const nextCard = () => setIndex((prev) => prev + 1)
+  const nextCard = () => setIndex(prev => prev + 1)
 
   if (!message) return <div>Loading...</div>
-
-  // deck finished
-  if (message.done) {
-    return (
-      <main className="container">
-        <h1>All messages viewed!</h1>
-      </main>
-    )
-  }
 
   return (
     <main className="container">
       <h1>Guess the Text</h1>
 
-      <MessageCard
-        key={index + "-" + JSON.stringify(message.text)} 
-        message={message}
-        flipped={flipped}
-        onToggle={() => setFlipped((prev) => !prev)}
-      />
+      {message.done ? (
+        <div className="finished-card">
+          <h2>All messages viewed!</h2>
+        </div>
+      ) : (
+        <MessageCard
+          key={index + JSON.stringify(message.text)}
+          message={message}
+          flipped={flipped}
+          onToggle={() => setFlipped(prev => !prev)}
+        />
+      )}
 
-      <button className="next-button" onClick={nextCard}>
+      <button className="next-button" disabled={message.done} onClick={nextCard}>
         Next
       </button>
     </main>

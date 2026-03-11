@@ -1,6 +1,6 @@
 // app/layout.tsx
 import "./globals.css"
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: "Guess the Text",

@@ -1,22 +1,29 @@
 /* globals.css */
 
 /* ---------------- Body / Container ---------------- */
+
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: linear-gradient(to bottom, #2a364b, #1f2738); /* navy → darker navy */
   color: white;
-  min-height:100vh;
+  height:100%;
+  /* margin:0; */
 }
 
 h1 {
   font-size: 36px;
+  /* margin-top:64px; */
 }
 
 .container {
-  min-height: 90vh;
+  height:100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 20px; /* space between card and button */
   /* padding: 20px; */

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Guess The Text",
-  description: "Who said that?",
+  title: "hardest engineer",
+  description: "Who said what?",
 };
 
 export default function RootLayout({

@@ -25,13 +25,13 @@
         "number": "+1234567890",
         "text": [
             {
-                "other": "Ze when you end up in the hospital I will be there for you"
+                "me": "Ze when you end up in the hospital I will be there for you"
             },
             {
-                "other": "Because I love you as a friend"
+                "me": "Because I love you as a friend"
             },
             {
-                "other": "Maybe even more"
+                "me": "Maybe even more"
             }
         ]
     },
